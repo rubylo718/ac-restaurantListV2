@@ -2,6 +2,7 @@ import express from 'express'
 import exphbs from 'express-handlebars'
 import mongoose from 'mongoose'
 import Restaurants from './models/restaurants.js'
+import bodyParser from 'body-parser'
 // import { createRequire } from 'module' // Bring in the ability to create the 'require' method
 // const require = createRequire(import.meta.url) // construct the require method
 // const restaurantList = require('./restaurant.json') // use the require method
@@ -21,6 +22,7 @@ db.once('open', () => {
 app.engine('hbs', exphbs.engine({ defaultLayout: 'main', extname: 'hbs' }))
 app.set('view engine', 'hbs')
 app.use(express.static('public'))
+app.use(bodyParser.urlencoded({ extended: true}))
 
 // view all restaurants (GET '/')
 app.get('/', (req, res) => {
@@ -29,6 +31,18 @@ app.get('/', (req, res) => {
     .then(restaurants => res.render('index', { restaurants }))
     .catch(error => console.log(error))
 })
+
+// add new restaurant: view to the new page
+app.get('/restaurants/new', (req, res) => {
+  return res.render('new')
+})
+// add new restaurant: POST '/restaurants and redirect to '/'
+app.post('/restaurants', (req, res) => {
+  Restaurants.create(req.body)
+  .then(() => res.redirect('/'))
+  .catch(error => console.log(error))
+})
+
 
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword
