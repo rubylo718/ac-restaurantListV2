@@ -31,7 +31,7 @@ app.get('/', (req, res) => {
     .catch(error => console.log(error))
 })
 
-// add new restaurant: view to the new page
+// go to add-new page
 app.get('/restaurants/new', (req, res) => {
   return res.render('new')
 })
@@ -51,7 +51,7 @@ app.get('/restaurants/:id', (req, res) => {
   .catch(error => console.log(error))
 })
 
-// edit detail of a certain restaurant
+// go to edit page
 app.get('/restaurants/:id/edit', (req, res) => {
   const id = req.params.id
   return Restaurants.findById(id)
@@ -59,6 +59,14 @@ app.get('/restaurants/:id/edit', (req, res) => {
   .then(restaurant => res.render('edit', { restaurant }))
   .catch(error => console.log(error))
 })
+// update detail info after edit
+app.post('/restaurants/:id/edit', (req, res) => {
+  const id = req.params.id
+  return Restaurants.findByIdAndUpdate(id, req.body)
+  .then(() => res.redirect('/'))
+  .catch(error => console.log(error))
+}) 
+
 
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword
