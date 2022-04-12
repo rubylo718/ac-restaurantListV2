@@ -37,7 +37,7 @@ app.get('/restaurants/new', (req, res) => {
 })
 // add new restaurant: POST '/restaurants and redirect to '/'
 app.post('/restaurants', (req, res) => {
-  Restaurants.create(req.body)
+  return Restaurants.create(req.body)
   .then(() => res.redirect('/'))
   .catch(error => console.log(error))
 })
@@ -67,15 +67,28 @@ app.post('/restaurants/:id/edit', (req, res) => {
   .catch(error => console.log(error))
 }) 
 
-
-app.get('/search', (req, res) => {
-  const keyword = req.query.keyword
-  const restaurants = restaurantList.results.filter(restaurant => {
-    return restaurant.name.toLowerCase().includes(keyword.toLowerCase()) || restaurant.category.includes(keyword)
-  })
-  res.render('index', { restaurants: restaurants, keyword: keyword })
+// delete a certain restaurant
+app.post('/restaurants/:id/delete', (req, res) => {
+  const id = req.params.id
+  return Restaurants.findByIdAndDelete(id, req.body)
+  .then(() => res.redirect('/'))
+  .catch(error => console.log(error))
 })
 
+// search
+// app.get('/search', (req, res) => {
+//   const keyword = req.query.keyword
+//   Restaurants.find()
+//   .lean()
+//   .then(restaurant => {
+//     const restaurants = restaurant.filter(restaurant => 
+//     restaurant.name.toLowerCase().includes(keyword.toLowerCase()) || 
+//     restaurant.category.includes(keyword)
+//   )
+//   res.render('index', { restaurant: restaurants, keyword: keyword })
+// })
+//   .catch(error => console.log(error))  
+// })
 
 
 app.listen(port, () => {
