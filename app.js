@@ -42,6 +42,14 @@ app.post('/restaurants', (req, res) => {
   .catch(error => console.log(error))
 })
 
+// view detail of a certain restaurant
+app.get('/restaurants/:id', (req, res) => {
+  const id = req.params.id
+  return Restaurants.findById(id)
+  .lean()
+  .then(restaurant => res.render('show', { restaurant }))
+  .catch(error => console.log(error))
+})
 
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword
@@ -51,12 +59,7 @@ app.get('/search', (req, res) => {
   res.render('index', { restaurants: restaurants, keyword: keyword })
 })
 
-app.get('/restaurants/:restaurant_id', (req, res) => {
-  const restaurant = restaurantList.results.find(
-    restaurant => restaurant.id.toString() === req.params.restaurant_id
-  )
-  res.render('show', { restaurant: restaurant })
-})
+
 
 app.listen(port, () => {
   console.log(`Express is running on http://localhost:${port}`)
