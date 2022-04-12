@@ -51,6 +51,15 @@ app.get('/restaurants/:id', (req, res) => {
   .catch(error => console.log(error))
 })
 
+// edit detail of a certain restaurant
+app.get('/restaurants/:id/edit', (req, res) => {
+  const id = req.params.id
+  return Restaurants.findById(id)
+  .lean()
+  .then(restaurant => res.render('edit', { restaurant }))
+  .catch(error => console.log(error))
+})
+
 app.get('/search', (req, res) => {
   const keyword = req.query.keyword
   const restaurants = restaurantList.results.filter(restaurant => {
