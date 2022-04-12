@@ -13,4 +13,4 @@ const restaurantSchema = new Schema({
   }
 )
 
-export default mongoose.model('RestaurantList', restaurantSchema)
+export default mongoose.model('Restaurants', restaurantSchema)
