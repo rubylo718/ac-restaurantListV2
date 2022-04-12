@@ -1,5 +1,5 @@
 {
-  "name": "S3-RestaurantListDB",
+  "name": "s3-restaurantlist",
   "version": "1.0.0",
   "description": "",
   "type": "module",
@@ -12,13 +12,16 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "express": "^4.17.3",
-    "express-handlebars": "^6.0.4"
-  },
   "standard": {
     "ignore": [
       "public/"
     ]
+  },
+  "dependencies": {
+    "express": "^4.17.3",
+    "express-handlebars": "^6.0.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
   }
 }
