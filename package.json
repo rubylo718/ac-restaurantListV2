@@ -14,12 +14,13 @@
   "license": "ISC",
   "standard": {
     "ignore": [
-      "public/"
+      "public/",
+      "restaurant.json"
     ]
   },
   "dependencies": {
     "express": "^4.17.3",
-    "express-handlebars": "^6.0.4",
+    "express-handlebars": "^6.0.5",
     "mongoose": "^6.2.10"
   },
   "devDependencies": {

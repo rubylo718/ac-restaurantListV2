@@ -1,10 +1,10 @@
 import express from 'express'
 import exphbs from 'express-handlebars'
 import mongoose from 'mongoose'
-
-import { createRequire } from 'module' // Bring in the ability to create the 'require' method
-const require = createRequire(import.meta.url) // construct the require method
-const restaurantList = require('./restaurant.json') // use the require method
+import Restaurants from './models/restaurants.js'
+// import { createRequire } from 'module' // Bring in the ability to create the 'require' method
+// const require = createRequire(import.meta.url) // construct the require method
+// const restaurantList = require('./restaurant.json') // use the require method
 
 const app = express()
 const port = 3000
@@ -14,7 +14,6 @@ const db = mongoose.connection
 db.on('error', () => {
   console.log('mongodb error')
 })
-
 db.once('open', () => {
   console.log('mongodb connected! good')
 })
@@ -23,8 +22,12 @@ app.engine('hbs', exphbs.engine({ defaultLayout: 'main', extname: 'hbs' }))
 app.set('view engine', 'hbs')
 app.use(express.static('public'))
 
+// view all restaurants (GET '/')
 app.get('/', (req, res) => {
-  res.render('index', { restaurants: restaurantList.results })
+  Restaurants.find()
+    .lean()
+    .then(restaurants => res.render('index', { restaurants }))
+    .catch(error => console.log(error))
 })
 
 app.get('/search', (req, res) => {

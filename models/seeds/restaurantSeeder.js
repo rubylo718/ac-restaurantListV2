@@ -1,9 +1,9 @@
 import Restaurants from '../restaurants.js'
 import mongoose from 'mongoose'
-mongoose.connect(process.env.MONGODB_URI_RES)
-const db = mongoose.connection
 
-import { createRequire } from 'module' // Bring in the ability to create the 'require' method
+import { createRequire } from 'module'
+mongoose.connect(process.env.MONGODB_URI_RES)
+const db = mongoose.connection // Bring in the ability to create the 'require' method
 const require = createRequire(import.meta.url) // construct the require method
 const restaurantList = require('../../restaurant.json') // use the require method
 
