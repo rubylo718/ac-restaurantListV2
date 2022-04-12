@@ -18,15 +18,12 @@
             <button class="btn btn-major" type="submit" id="search-button"><i
                 class="fas fa-search"
               ></i></button>
+            <a class="btn btn-warning" href="./restaurants/new" role="button">+</a>
           </div>
         </div>
       </form>
     </div>
   </div>
-</div>
-
-<div class="container mt-5" style="align-items:center">
-<a class="btn btn-success" href="./restaurants/new" role="button">Add New Restaurant</a>
 </div>
 
 {{! restaurant list }}
@@ -50,6 +47,12 @@
                   {{this.rating}}
                   <i class="fas fa-star fa-xs"></i>
                 </span>
+
+                <div class="card-body">
+                  <a href="#" class="card-link">Edit</a>
+                  <a href="./restaurants/{{this._id}}" class="card-link">Detail</a>
+                  <a href='#' class="btn btn-danger btn-sm" role="button">Delete</a>
+                </div>
 
               </div>
             </div>
