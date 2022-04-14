@@ -2,9 +2,6 @@ import express from 'express'
 import exphbs from 'express-handlebars'
 import mongoose from 'mongoose'
 import Restaurants from './models/restaurants.js'
-// import { createRequire } from 'module' // Bring in the ability to create the 'require' method
-// const require = createRequire(import.meta.url) // construct the require method
-// const restaurantList = require('./restaurant.json') // use the require method
 
 const app = express()
 const port = 3000
@@ -75,21 +72,20 @@ app.post('/restaurants/:id/delete', (req, res) => {
   .catch(error => console.log(error))
 })
 
-// search
-// app.get('/search', (req, res) => {
-//   const keyword = req.query.keyword
-//   Restaurants.find()
-//   .lean()
-//   .then(restaurant => {
-//     const restaurants = restaurant.filter(restaurant => 
-//     restaurant.name.toLowerCase().includes(keyword.toLowerCase()) || 
-//     restaurant.category.includes(keyword)
-//   )
-//   res.render('index', { restaurant: restaurants, keyword: keyword })
-// })
-//   .catch(error => console.log(error))  
-// })
-
+// search restaurants by name or category
+app.get('/search', (req, res)=> {
+  const keyword = req.query.keyword 
+  return Restaurants.find() 
+  .lean()
+  .then(restaurants => {
+    const filteredData = restaurants.filter(
+      data => data.name.toLowerCase().includes(keyword) ||
+      data.category.includes(keyword)
+    ) 
+    res.render('index', { restaurants: filteredData, keyword: keyword })
+  })
+  .catch(error => console.log(error))
+})
 
 app.listen(port, () => {
   console.log(`Express is running on http://localhost:${port}`)
