@@ -46,16 +46,14 @@
                 <span class="badge badge-pill badge-danger font-weight-normal">
                   {{this.rating}}
                   <i class="fas fa-star fa-xs"></i>
-                </span>
-
-                <div class="card-body">
-                  <a href="./restaurants/{{this._id}}/edit" class="card-link">Edit</a>
-                  <a href="./restaurants/{{this._id}}" class="card-link">Detail</a>
-                  <form action="./restaurants/{{this._id}}/delete" method="POST">
-                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                  </form>
-                </div>
-
+                </span>              
+              </div>
+              <div class="card-footer d-flex justify-content-end align-items-center flex-wrap">
+                <a href="./restaurants/{{this._id}}/edit" class="card-link">Edit</a>
+                <a href="./restaurants/{{this._id}}" class="card-link">Detail</a>
+                <form action="./restaurants/{{this._id}}/delete" method="POST">
+                  <button type="submit" class="btn btn-danger btn-sm mx-1">Delete</button>
+                </form>
               </div>
             </div>
           </a>
