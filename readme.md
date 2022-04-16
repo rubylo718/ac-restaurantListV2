@@ -1,10 +1,15 @@
 # Restaurant List
 
-This an assignment of AlphaCamp Term 2-3 week 1.
+This an assignment of AlphaCamp Term 2-3 week 3.
 
 
 ## Target
-To build web app through Express.js framework and run through Node.js.
+
+Continue improving the app based on the previous work (ac-restaurantList):
+
+1. New function adding: CRUD
+
+2. Database connection
 
 ## User Story
 
@@ -14,19 +19,32 @@ User can search the restaurants by name or category.
 
 User can click the photo to get the detailed information.
 
+User can add, edit, and delete the information.
+
 ## Getting Started
 
-Just run the command:
+Run the App:
 
 ```
 npm run dev
 ```
 
+Run the seeder:
+
+```
+npm run seed
+```
+
+
 ## Packages
 
-express@4.17.3
+body-parser: 1.20.0
 
-express-handlebars@6.0.4
+express: 4.17.3
+
+express-handlebars: 6.0.5
+
+mongoose: 6.2.10
 
 ## Author
 
@@ -34,4 +52,4 @@ Ruby Lo
 
 ## Submitted Date
 
-Apr. 11, 2022
+Apr. 16, 2022
